@@ -1,0 +1,24 @@
+name: Quarkus CI
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - "main"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@4
+      - name: Setup JDK
+        uses: actions/setup-java@4
+        with:
+          java-version: '21'
+          distribution: 'oracle'
+          cache: maven
+      - name: Package with Maven
+        run: mvn package
